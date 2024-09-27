@@ -1,20 +1,21 @@
-table, tr, td{
-    border: 1px solid black;
+table, tr, td, th{
+    border: 1px solid #000 ;
     border-collapse: collapse;
-    text-align: center;
+   
 }
-
-table tr:first-child{
-    background-color: peru;
+ 
+table tbody tr:nth-child(even){
+    background-color: rgb(141, 80, 80);
+}
+table tbody tr:nth-child(odd){
+    background-color: rgb(89, 0, 255);
+}
+ 
+table tbody tr:hover{
+    background-color: rgb(255, 255, 255);
+}
+ 
+table thead tr{
+    background-color: rgb(53, 112, 92);
     font-weight: bold;
 }
-
-table, tr:not(:first-child):nth-child(even){
-    background-color: steelblue;
-}
-
-table, tr:not(:first-child):nth-child(odd){
-    background-color: slategray;
-}
-
-
