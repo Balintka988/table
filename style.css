@@ -19,3 +19,7 @@ table thead tr{
     background-color: rgb(53, 112, 92);
     font-weight: bold;
 }
+
+.selected {
+    transform: scale(1.2);
+}
