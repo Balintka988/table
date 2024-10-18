@@ -49,10 +49,6 @@ const th_firstname2 = document.createElement('th');
 tr.appendChild(th_firstname2);
 th_firstname2.innerHTML='keresztnév2';
 
-
-th_firstname1.colSpan=2;
-
-
 const th_pet = document.createElement('th');
 tr.appendChild(th_pet);
 th_pet.innerHTML="haziallat";
