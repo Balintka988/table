@@ -36,28 +36,14 @@ table.appendChild(thead);
  
 const tr = document.createElement('tr');
 thead.appendChild(tr);
- 
-const th_lastname = document.createElement('th');
-tr.appendChild(th_lastname);
-th_lastname.innerHTML='vezetéknév';
 
-const th_firstname1 = document.createElement('th');
-tr.appendChild(th_firstname1);
-th_firstname1.innerHTML='keresztnév1';
 
-const th_firstname2 = document.createElement('th');
-tr.appendChild(th_firstname2);
-th_firstname2.innerHTML='keresztnév2';
+createTableCell("th", 'vezetéknév', tr)
+createTableCell("th", 'keresztnév1', tr)
 
-const th_pet = document.createElement('th');
-tr.appendChild(th_pet);
-th_pet.innerHTML="haziallat";
+createTableCell("th", 'haziallat', tr)
+createTableCell("th", 'hazas', tr)
 
-const th_married = document.createElement('th');
-tr.appendChild(th_married);
-th_married.innerHTML="hazas";
-
- 
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
 
@@ -172,4 +158,15 @@ function validateFields(lastname, firstname1, pet){
         result = false;
     }
     return result;
+}
+/**
+ * 
+ * @param {'td'|'th'} tagName 
+ * @param {string} innerHTML 
+ * @param {HTMLTableRowElement} parentElement 
+ */
+function createTableCell(tagName, innerHTML, parentElement){
+    const element = document.createElement(tagName);
+    element.innerHTML = innerHTML;
+    parentElement.appendChild(element);
 }
