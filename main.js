@@ -37,10 +37,9 @@ table.appendChild(thead);
 const tr = document.createElement('tr');
 thead.appendChild(tr);
 
-
+//-----------Amit órán csináltunk
 createTableCell("th", 'vezetéknév', tr)
 createTableCell("th", 'keresztnév1', tr)
-
 createTableCell("th", 'haziallat', tr)
 createTableCell("th", 'hazas', tr)
 
@@ -88,34 +87,22 @@ function renderTable(){
         const tbody_tr = document.createElement('tr');
         tbody.appendChild(tbody_tr);
      
-        const tbody_td_lastname = document.createElement('td');
-        tbody_tr.appendChild(tbody_td_lastname);
-       
-        tbody_td_lastname.innerHTML = pers.lastname;
-     
-        const tbody_td_firstname = document.createElement('td');
-        tbody_tr.appendChild(tbody_td_firstname);
-       
-        tbody_td_firstname.innerHTML = pers.firstname1;
+        createTableCell("td", pers.lastname, tbody_tr );
+
+        createTableCell("td", pers.firstname1, tbody_tr );
     
         
         if(pers.firstname2 === undefined){
-            tbody_td_firstname.colSpan = 2
+            pers.firstname1.colSpan = 2;
         }
         else{
-            const tbody_td_firstname = document.createElement('td');
-            tbody_tr.appendChild(tbody_td_firstname);
-           
-            tbody_td_firstname.innerHTML = pers.firstname2;
+            createTableCell("td", pers.firstname2, tbody_tr )
         }
 
-        const td_pet = document.createElement('td');
-        tbody_tr.appendChild(td_pet);
-        td_pet.innerHTML = pers.pet;
+        createTableCell("td", pers.pet, tbody_tr );
     
-        const td_married = document.createElement('td');
-        tbody_tr.appendChild(td_married);
-        td_married.innerHTML = pers.married;
+        createTableCell("td", pers.married ? "Igen" : "Nem", tbody_tr );//ezzel leváltottuk a "hosszabb" if else-t
+
 
         
         tbody_tr.addEventListener ('click', function(e){//console.log('clicked');
@@ -127,14 +114,7 @@ function renderTable(){
         }
         e.currentTarget.classList.add('selected')
     })
-
-        if(pers.married === true){
-            td_married.innerHTML = "Igen"
-        }
-        else{
-            td_married.innerHTML = "Nem"
-        }
-    }
+}
 }
 
 function validateFields(lastname, firstname1, pet){
