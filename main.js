@@ -42,7 +42,8 @@ createTableCell("th", 'vezetéknév', tr)
 const keresztnev1 = createTableCell("th", 'keresztnév1', tr)
 createTableCell("th", 'haziallat', tr)
 createTableCell("th", 'hazas', tr)
-keresztnev1.colspan = 2;
+
+keresztnev1.colspan = 2;//a keresztnév1 cellát olyanra állítjuk be hogy 2cellát foglaljon el(nem működik sajnos)
 
 
 const tbody = document.createElement('tbody');
@@ -91,9 +92,9 @@ function renderTable(){
      
         createTableCell("td", pers.lastname, tbody_tr );
 
-        let keresztnev = createTableCell("td", pers.firstname1, tbody_tr );
+        const keresztnev = createTableCell("td", pers.firstname1, tbody_tr );//azért kellett változóba tenni, hogy később hozzá tudjunk adni colSpan-t
         
-        if(pers.firstname2 === undefined){
+        if(pers.firstname2 === undefined){//ha firstname2 undefined akkor firstname1 cella kettőt fog elfoglalni más esetben meg odateszi
             keresztnev.colSpan = 2;
         }
         else{
