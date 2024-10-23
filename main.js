@@ -39,9 +39,11 @@ thead.appendChild(tr);
 
 //-----------Amit órán csináltunk
 createTableCell("th", 'vezetéknév', tr)
-createTableCell("th", 'keresztnév1', tr)
+const keresztnev1 = createTableCell("th", 'keresztnév1', tr)
 createTableCell("th", 'haziallat', tr)
 createTableCell("th", 'hazas', tr)
+keresztnev1.colspan = 2;
+
 
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
@@ -89,14 +91,13 @@ function renderTable(){
      
         createTableCell("td", pers.lastname, tbody_tr );
 
-        createTableCell("td", pers.firstname1, tbody_tr );
-    
+        let keresztnev = createTableCell("td", pers.firstname1, tbody_tr );
         
         if(pers.firstname2 === undefined){
-            pers.firstname1.colSpan = 2;
+            keresztnev.colSpan = 2;
         }
         else{
-            createTableCell("td", pers.firstname2, tbody_tr )
+            createTableCell("td", pers.firstname2, tbody_tr );
         }
 
         createTableCell("td", pers.pet, tbody_tr );
@@ -149,4 +150,5 @@ function createTableCell(tagName, innerHTML, parentElement){
     const element = document.createElement(tagName);
     element.innerHTML = innerHTML;
     parentElement.appendChild(element);
+    return element;
 }
