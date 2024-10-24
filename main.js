@@ -39,12 +39,11 @@ thead.appendChild(tr);
 
 //-----------Amit órán csináltunk
 createTableCell("th", 'vezetéknév', tr)
-const keresztnev1 = createTableCell("th", 'keresztnév1', tr)
+const keresztnev1 = createTableCell("th", 'keresztnév', tr)
 createTableCell("th", 'haziallat', tr)
 createTableCell("th", 'hazas', tr)
 
-keresztnev1.colspan = 2;//a keresztnév1 cellát olyanra állítjuk be hogy 2cellát foglaljon el(nem működik sajnos)
-
+keresztnev1.colSpan = 2;//a keresztnév1 cellát olyanra állítjuk be hogy 2cellát foglaljon el
 
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
