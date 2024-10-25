@@ -27,26 +27,15 @@ let array = [
         pet: 'macska'
     },
 ]
- 
-const table = document.createElement('table');
-document.body.appendChild(table);
- 
-const thead = document.createElement('thead');
-table.appendChild(thead);
- 
-const tr = document.createElement('tr');
-thead.appendChild(tr);
 
-//-----------Amit órán csináltunk
-createTableCell("th", 'vezetéknév', tr)
-const keresztnev1 = createTableCell("th", 'keresztnév', tr)
-createTableCell("th", 'haziallat', tr)
-createTableCell("th", 'hazas', tr)
+createHTMLelement  ('table', 'person_table', document.body);
+createHTMLelementWithParentId('thead', 'person_thead', 'person_table');
+createHTMLelementWithParentId('tr', 'person_tr', 'person_thead');
 
-keresztnev1.colSpan = 2;//a keresztnév1 cellát olyanra állítjuk be hogy 2cellát foglaljon el
+createHTMLelementWithParentId('tbody', 'person_tbody', 'person_table');
 
-const tbody = document.createElement('tbody');
-table.appendChild(tbody);
+
+createTableHeaderCell();
 
 
 const form = document.getElementById('form');
@@ -77,47 +66,14 @@ form.addEventListener('submit', function(e){
         }
         array.push(newperson);
         console.log(array);
-        renderTable();
+        renderTable(array);
         form.reset()
     }
 })  
 
-renderTable();
-
-function renderTable(){
-    tbody.innerHTML = '';
-    for(const pers of array){
-        const tbody_tr = document.createElement('tr');
-        tbody.appendChild(tbody_tr);
-     
-        createTableCell("td", pers.lastname, tbody_tr );
-
-        const keresztnev = createTableCell("td", pers.firstname1, tbody_tr );//azért kellett változóba tenni, hogy később hozzá tudjunk adni colSpan-t
-        
-        if(pers.firstname2 === undefined){//ha firstname2 undefined akkor firstname1 cella kettőt fog elfoglalni más esetben meg odateszi
-            keresztnev.colSpan = 2;
-        }
-        else{
-            createTableCell("td", pers.firstname2, tbody_tr );
-        }
-
-        createTableCell("td", pers.pet, tbody_tr );
-    
-        createTableCell("td", pers.married ? "Igen" : "Nem", tbody_tr );//ezzel leváltottuk a "hosszabb" if else-t
+renderTable(array);
 
 
-        
-        tbody_tr.addEventListener ('click', function(e){//console.log('clicked');
-        const selected = tbody.querySelector('.selected')
-        
-        if (selected != undefined){
-            selected.classList.remove('selected');
-            
-        }
-        e.currentTarget.classList.add('selected')
-    })
-}
-}
 
 function validateFields(lastname, firstname1, pet){
     let result = true;
@@ -141,15 +97,4 @@ function validateFields(lastname, firstname1, pet){
     }
     return result;
 }
-/**
- * 
- * @param {'td'|'th'} tagName 
- * @param {string} innerHTML 
- * @param {HTMLTableRowElement} parentElement 
- */
-function createTableCell(tagName, innerHTML, parentElement){
-    const element = document.createElement(tagName);
-    element.innerHTML = innerHTML;
-    parentElement.appendChild(element);
-    return element;
-}
+
