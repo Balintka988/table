@@ -78,6 +78,7 @@ form.addEventListener('submit', function(e){
         array.push(newperson);
         console.log(array);
         renderTable();
+        form.reset()
     }
 })  
 
