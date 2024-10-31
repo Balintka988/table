@@ -80,27 +80,29 @@ function renderTable(person_array){
 }
 }
 
+
+//ez a függvényünk megnézi, hogy a mezőink ki vannak e töltve. ha bármelyik nincsen kitöltve akkor hamisra állítja a van_e változónkat hamisra állítja
 function validateFields(lastname, firstname1, pet) {
-    let valtozo = true;
+    let van_e = true;//adunk egy kezdeti értéket ennek a boolean-nak
 
     if (!validateElement(lastname)) {
-        valtozo = false;
+        van_e = false;
     }
 
     if (!validateElement(firstname1)) {
-        valtozo = false;
+        van_e = false;
     }
 
     if (!validateElement(pet)) {
-        valtozo = false;
+        van_e = false;
     }
 
-    return valtozo;
+    return van_e;//visszaadja, hogy ki vannak-e töltve a mezők
 }
 
-
+//Ez a függvényünk ugyanúgy megnézi hogy üres e a mezőnk csak itt ha már üres akkor error message-t ad vissza
 function validateElement(field) {
-    const parentElement = field.parentElement;
+    const parentElement = field.parentElement;//megnézi a field mező szülőelemét és elmenti a parentElement változóba
     const error = parentElement.querySelector('.error');
 
     if (field.value === "") {
