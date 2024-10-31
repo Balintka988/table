@@ -55,7 +55,7 @@ function renderTable(person_array){
 
         const keresztnev = createTableCell("td", pers.firstname1, tbody_tr );//azért kellett változóba tenni, hogy később hozzá tudjunk adni colSpan-t
         
-        if(pers.firstname2 === undefined){//ha firstname2 undefined akkor firstname1 cella kettőt fog elfoglalni más esetben meg odateszi
+        if(!pers.firstname2){//ha firstname2 undefined akkor firstname1 cella kettőt fog elfoglalni más esetben meg odateszi
             keresztnev.colSpan = 2;
         }
         else{
@@ -78,4 +78,36 @@ function renderTable(person_array){
         e.currentTarget.classList.add('selected')
     })
 }
+}
+
+function validateFields(lastname, firstname1, pet) {
+    let valtozo = true;
+
+    if (!validateElement(lastname)) {
+        valtozo = false;
+    }
+
+    if (!validateElement(firstname1)) {
+        valtozo = false;
+    }
+
+    if (!validateElement(pet)) {
+        valtozo = false;
+    }
+
+    return valtozo;
+}
+
+
+function validateElement(field) {
+    const parentElement = field.parentElement;
+    const error = parentElement.querySelector('.error');
+
+    if (field.value === "") {
+        error.innerHTML = "Kötelező";
+        return false;
+    }
+
+    error.innerHTML = "";
+    return true;
 }
