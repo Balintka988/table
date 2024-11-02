@@ -10,15 +10,6 @@ function createTableCell(tagName, innerHTML, parentElement){
     parentElement.appendChild(element);
     return element;
 }
-//létrehozni egy ekementet createElement(tag)
-//id-t adni neki (stringet adni neki)
-//szeretnénk appendchildolni valamire (parent)
-
-//előszedjük parent id(string) alapján a parent elementet
-//ha definiált a parentElement(if) 
-//meghívjuk a createHTML elementet 3paraméterre van szüksége
-
-//elkérjük a table_header row-t id szerint
 
 
 function createHTMLelement(tag, id, parent){
@@ -81,32 +72,27 @@ function renderTable(person_array){
 }
 
 
-//ez a függvényünk megnézi, hogy a mezőink ki vannak e töltve. ha bármelyik nincsen kitöltve akkor hamisra állítja a van_e változónkat hamisra állítja
-function validateFields(lastname, firstname1, pet) {
-    let van_e = true;//adunk egy kezdeti értéket ennek a boolean-nak
 
-    if (!validateElement(lastname)) {
-        van_e = false;
+function validateFields(fields) {
+    let nincs_ures = true; // Kezdetben feltételezzük, hogy minden mező érvényes
+
+    for (const field of fields) {
+        if (!validateElement(field)) {
+            nincs_ures = false; // Ha talál érvénytelen mezőt, false értékkel tér vissza 
+        }
     }
 
-    if (!validateElement(firstname1)) {
-        van_e = false;
-    }
-
-    if (!validateElement(pet)) {
-        van_e = false;
-    }
-
-    return van_e;//visszaadja, hogy ki vannak-e töltve a mezők
+    return nincs_ures; // Visszaadja, hogy minden mező érvényes-e
 }
 
-//Ez a függvényünk ugyanúgy megnézi hogy üres e a mezőnk csak itt ha már üres akkor error message-t ad vissza
+
+//Ez a függvényünk ugyanúgy megnézi hogy üres e a mezőnk csak itt ha már üres akkor error message-t ad vissza ha viszont nem üres akkor meg törli
 function validateElement(field) {
-    const parentElement = field.parentElement;//megnézi a field mező szülőelemét és elmenti a parentElement változóba
-    const error = parentElement.querySelector('.error');
+    
+    const error = field.parentElement.querySelector('.error');
 
     if (field.value === "") {
-        error.innerHTML = "Kötelező";
+        error.innerHTML = "Kötelező";//itt adjuk meg a hibaüzenetet ha nincs semmi beírva és ez után false értékkel tér vissza
         return false;
     }
 
