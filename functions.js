@@ -4,24 +4,24 @@
  * @param {string} innerHTML 
  * @param {HTMLTableRowElement} parentElement 
  */
-function createTableCell(tagName, innerHTML, parentElement){
-    const element = document.createElement(tagName);
-    element.innerHTML = innerHTML;
-    parentElement.appendChild(element);
-    return element;
+function createTableCell(tagName, innerHTML, parentElement){//ezeket az elemeket hozzuk létre ebben a függvényben
+    const element = document.createElement(tagName);//létrehozunk egy cimként amit eltárolunk az element változóban ez vagy th vagy td
+    element.innerHTML = innerHTML;//itt az innerHTML aktuális tartalmát megadjuk az element változónak, ami string
+    parentElement.appendChild(element);//vegül hozzáadjuk a parentElementhez az elementet
+    return element;//visszatérünk az elementtel
 }
 
 
 function createHTMLelement(tag, id, parent){
     const HTMLelement = document.createElement(tag);
-    HTMLelement.id = id;
+    HTMLelement.id = id;//itt a HTMLelementnek adunk egy id-t
     parent.appendChild(HTMLelement);
 }
 
 function createHTMLelementWithParentId(tag, id, parentId){
     const parent_element = document.getElementById(parentId);
-    if (parent_element != undefined){
-        createHTMLelement(tag, id, parent_element);
+    if (parent_element != undefined){//csak abban az esetben tesszük ezt meg hogyha a bekért parent_element létezik
+        createHTMLelement(tag, id, parent_element);//itt meghívjuk a createHTMLelement függvényünket viszont parent_elementet adunk neki parent helyett
     }
 }
 
@@ -29,31 +29,31 @@ function createTableHeaderCell(){
     const head_tr = document.getElementById('person_tr');
     //-----------Amit órán csináltunk
     createTableCell("th", 'vezetéknév', head_tr)
-    const keresztnev1 = createTableCell("th", 'keresztnév', head_tr)
+    const keresztnev1 = createTableCell("th", 'keresztnév', head_tr)//eltároljuk egy változóban a keresztnevet annak érekében hogy később tudjunk hozzáadni colspant
     createTableCell("th", 'haziallat', head_tr)
     createTableCell("th", 'hazas', head_tr)
     keresztnev1.colSpan = 2;//a keresztnév1 cellát olyanra állítjuk be hogy 2cellát foglaljon el
 }
 
 function renderTable(person_array){
-    const tbody = document.getElementById("person_tbody");
-    tbody.innerHTML = "";
-    for(const pers of person_array){
-        const tbody_tr = document.createElement('tr');
-        tbody.appendChild(tbody_tr);
+    const tbody = document.getElementById("person_tbody");//megkeressük a 'person_tbody'idjű törzset és eltároljuk egy változóban
+    tbody.innerHTML = "";//kitöröljük az imént megadott tartalmat
+    for(const pers of person_array){//végigmegyünk a person_array tömbön és itt hozzuk létre a táblázatunk sorait
+        const tbody_tr = document.createElement('tr');//új sort hozunk létre
+        tbody.appendChild(tbody_tr);//hozzáadjuk a tbody-ba a törzsbe
      
-        createTableCell("td", pers.lastname, tbody_tr );
+        createTableCell("td", pers.lastname, tbody_tr );//itt adjuk hozzá a vezetéknevet a táblázatunk sorához
 
         const keresztnev = createTableCell("td", pers.firstname1, tbody_tr );//azért kellett változóba tenni, hogy később hozzá tudjunk adni colSpan-t
         
-        if(!pers.firstname2){//ha firstname2 undefined akkor firstname1 cella kettőt fog elfoglalni más esetben meg odateszi
+        if(!pers.firstname2){//ha firstname2 undefined akkor firstname1 cella kettőt fog elfoglalni
             keresztnev.colSpan = 2;
         }
         else{
-            createTableCell("td", pers.firstname2, tbody_tr );
+            createTableCell("td", pers.firstname2, tbody_tr );//ha van második keresztnév akkor simán hozzáadjuk azt is
         }
 
-        createTableCell("td", pers.pet, tbody_tr );
+        createTableCell("td", pers.pet, tbody_tr );//hozzáadjuk a háziállat cellát is a 
     
         createTableCell("td", pers.married ? "Igen" : "Nem", tbody_tr );//ezzel leváltottuk a "hosszabb" if else-t
 
@@ -61,12 +61,12 @@ function renderTable(person_array){
         
         tbody_tr.addEventListener ('click', function(e){//console.log('clicked');
         const selected = tbody.querySelector('.selected')
-        
+        //ha van olyan sor amire már rá lett kattintva akkor arról eltávolítjuk a kijelölést
         if (selected != undefined){
             selected.classList.remove('selected');
             
         }
-        e.currentTarget.classList.add('selected')
+        e.currentTarget.classList.add('selected')//ha van egy új kattintás egy új sorra akkor hozzáadjuk
     })
 }
 }
@@ -74,10 +74,10 @@ function renderTable(person_array){
 
 
 function validateFields(fields) {
-    let nincs_ures = true; // Kezdetben feltételezzük, hogy minden mező érvényes
+    let nincs_ures = true; // Kezdetben feltételezzük, hogy minden mezőben van valami írva
 
     for (const field of fields) {
-        if (!validateElement(field)) {
+        if (!validateElement(field)) {//itt nézzük meg az aktuális mezőt hogy van e benne valami
             nincs_ures = false; // Ha talál érvénytelen mezőt, false értékkel tér vissza 
         }
     }
@@ -96,6 +96,6 @@ function validateElement(field) {
         return false;
     }
 
-    error.innerHTML = "";
+    error.innerHTML = "";//itt töröljük ki a hibaüzenetet
     return true;
 }
