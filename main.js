@@ -51,8 +51,8 @@ form.addEventListener('submit', function(e){//eseményfigyelő az űrlap elküld
             pet: document.getElementById('pet').value,
         }
         array.push(newperson);//newperson objektumot hozzáadta az array tömbhöz
-        console.log(array);//konzolra kiírja a
-        renderTable(array);
+        console.log(array);//konzolra kiírja a tömb tartalmát
+        renderTable(array);//a táblázat új adatokkal való frissítése
         form.reset()//törli a beírt adatokat a cellákból
         
     }

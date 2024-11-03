@@ -71,7 +71,7 @@ function renderTable(person_array){
 }
 }
 
-
+//ezt a módszert azért hagytam mert így nem tudtam megoldani azt hogy mindenhova más hibaüzenetet adjon
 /*
 function validateFields(fields) {
     let nincs_ures = true; // Kezdetben feltételezzük, hogy minden mezőben van valami írva
@@ -86,7 +86,6 @@ function validateFields(fields) {
 }
 */
 
-
 function validateFields(lastname, firstname1, pet){
     const keresztnev = document.getElementById(lastname); //megkeressük a vezetéknevet
     const vezeteknev = document.getElementById(firstname1); // a keresztnevet
@@ -94,7 +93,7 @@ function validateFields(lastname, firstname1, pet){
 
     let nincs_kihagyva = true;//alapból true értékkel indulunk, feltételezzük, hogy nincs kihagyás
     if(!validateElement(keresztnev, "Kell a vezetékneved")){//itt adjuk meg mindegyiknek a személyre szabott hibaüzenetét
-        nincs_kihagyva = false;
+        nincs_kihagyva = false;//ha a mező üres akkor false értékkel tér visszas
     }
     if(!validateElement(vezeteknev, "Kell a keresztneved")){
         nincs_kihagyva = false;
@@ -108,12 +107,12 @@ function validateFields(lastname, firstname1, pet){
 
 
 //Ez a függvényünk ugyanúgy megnézi hogy üres e a mezőnk csak itt ha már üres akkor error message-t ad vissza ha viszont nem üres akkor meg törli
-function validateElement(field, errortext) {
+function validateElement(field, hibauzenet) {//itt kettő paramétert vesz fel a függvényünk a field amit ellenőrizni fogunk és a hozzátartozó hibaüzenet
     const parentElement = field.parentElement;
     const error = parentElement.querySelector('.error');
 
     if (field.value === "") {
-        error.innerHTML = errortext;//itt adjuk meg a hibaüzenetet ha nincs semmi beírva és ez után false értékkel tér vissza
+        error.innerHTML = hibauzenet;//itt adjuk meg a hibaüzenetet ha nincs semmi beírva és ez után false értékkel tér vissza
         return false;
     }
 
