@@ -23,3 +23,8 @@ table thead tr{
 .selected {
     transform: scale(1.2);
 }
+
+.error {
+    color: red;
+    font-weight: bold;
+}
