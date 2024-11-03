@@ -42,7 +42,7 @@ createTableHeaderCell();
 form.addEventListener('submit', function(e){//eseményfigyelő az űrlap elküldéséhez. Akkor fut le amikor rányomtunk a feltöltés gombra
     e.preventDefault()
     const form = e.currentTarget;//ez azért kellett mert feladat volt, hogy ne globális változóban legyen és így könyebb 
-    if(validateFields([lastname, firstname1, pet])){//függvényhívás, ha minden kötelező mező ki van töltve akkor folytatódik a kód futása
+    if(validateFields("lastname", "firstname1", "pet")){//függvényhívás, ha minden kötelező mező ki van töltve akkor folytatódik a kód futása
         const newperson = {//itt vesszük fel a mezők értékeit egy objektumba
             firstname1: document.getElementById('firstname1').value,
             firstname2: document.getElementById('firstname2').value,

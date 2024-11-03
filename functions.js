@@ -72,7 +72,7 @@ function renderTable(person_array){
 }
 
 
-
+/*
 function validateFields(fields) {
     let nincs_ures = true; // Kezdetben feltételezzük, hogy minden mezőben van valami írva
 
@@ -84,18 +84,40 @@ function validateFields(fields) {
 
     return nincs_ures; // Visszaadja, hogy minden mező érvényes-e
 }
+*/
+
+
+function validateFields(lastname, firstname1, pet){
+    const keresztnev = document.getElementById(lastname); //megkeressük a vezetéknevet
+    const vezeteknev = document.getElementById(firstname1); // a keresztnevet
+    const allat = document.getElementById(pet); // és az állat mezőjét
+
+    let nincs_kihagyva = true;//alapból true értékkel indulunk, feltételezzük, hogy nincs kihagyás
+    if(!validateElement(keresztnev, "Kell a vezetékneved")){//itt adjuk meg mindegyiknek a személyre szabott hibaüzenetét
+        nincs_kihagyva = false;
+    }
+    if(!validateElement(vezeteknev, "Kell a keresztneved")){
+        nincs_kihagyva = false;
+    }
+    if(!validateElement(allat, "Az állatodat se felejtsd el")){
+        nincs_kihagyva = false;
+    }
+
+    return nincs_kihagyva
+}
 
 
 //Ez a függvényünk ugyanúgy megnézi hogy üres e a mezőnk csak itt ha már üres akkor error message-t ad vissza ha viszont nem üres akkor meg törli
-function validateElement(field) {
-    
-    const error = field.parentElement.querySelector('.error');
+function validateElement(field, errortext) {
+    const parentElement = field.parentElement;
+    const error = parentElement.querySelector('.error');
 
     if (field.value === "") {
-        error.innerHTML = "Kötelező";//itt adjuk meg a hibaüzenetet ha nincs semmi beírva és ez után false értékkel tér vissza
+        error.innerHTML = errortext;//itt adjuk meg a hibaüzenetet ha nincs semmi beírva és ez után false értékkel tér vissza
         return false;
     }
 
     error.innerHTML = "";//itt töröljük ki a hibaüzenetet
+
     return true;
 }
